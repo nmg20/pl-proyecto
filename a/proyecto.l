@@ -4,21 +4,32 @@
 #include "proyecto.tab.h"
 %}
 
-nl        [\n\r]
-ws        [ \t]
-de         ({ws}*)?"def"{ws}     
-dm        ({ws}*)?"defmodule"{ws}
-do        "do"
+ws        [ \t\n\r]
+de        "def"
+dm        "defmodule"
+d         "do"
 en        "end"
+F         "false"
+T         "true"
+N         "nil"
+W         "when"
+A         "and"
+O         "or"
+n         "not"
+f         "fn"
+ar        "->"
+po        [(]
+pc        [)]
+INT       [0-9]+
+ATOM      :[a-z_]+
+mod       [A-Z]([A-Z]|[a-z])*
+name      [a-z_]+
+
+%s FUN
+
 %%
-{ws}* {}
-{nl}* {}
-{open}{version}                    {yylval.valFloat=atof(yytext);return VERSION;}
-{ws}?{encoding}{close}             {yylval.valStr=strdup(yytext);return ENCODING;}
-{open}"!--"{comment}"--"{close}    {yylval.valStr=strdup(yytext);return COM;}
-{open}{tagname}{close}             {yylval.valStr=strdup(yytext);return TAG_O;}
-{open}"/"{tagname}{close}          {yylval.valStr=strdup(yytext);return TAG_C;}
-{tagcont}                          {yylval.valStr=strdup(yytext);return CONT;}
-.                                  {yylval.valFloat=atof(yytext);return ERROR;}
+<INITIAL>{ws}   {}
+<INITIAL>{dm}   {return DM;}
+<INITIAL>{mod}  {yylval.s=strdup(yytext);return MOD;}
 %%
 

@@ -18,74 +18,19 @@ static void error(int l){
 
 %}
 %union{
-  char * valStr;
+  char * str;
   float valFloat;
 }
-%token <valStr> TAG_O TAG_C COM ERROR
-%token VERSION ENCODING CONT
-%type <valStr> entradas cabecera tag tags tag_o tag_c contenido
-%start S
+%token <str> 
+%token DM DE DO END 
+%type <str> mods mod
+%start Prog 
 %%
 
-S : cabecera entradas {printf("Sintaxis XML correcta.\n");}
-  ;
+Prog : mods
 
-cabecera : VERSION ENCODING {}
-  | VERSION {error(yylineno+1);
-      printf("Cabecera del documento incompleta.\n");
-      return 0;}
-  | ENCODING {error(yylineno+1);
-      printf("Cabecera del documento incompleta.\n");
-      return 0;}
-  | {error(yylineno+1);
-      printf("Documento XML sin cabecera.\n");
-      return 0;}
-  ;
-
-entradas : entradas COM {}
-  | entradas tags {}
-  | COM {}
-  | tags {}
-  | ERROR {error(yylineno);
-        printf("Formato de entrada no válido.\n");
-        return 0;}
-;
-
-tags : tags tag {}
-  | tags COM {}
-  | tag {}
-  ;
-
-tag : tag_o contenido tag_c {int eq=strcmp(tag($1),tag($3)); if(eq!=0){
-        error(yylineno);
-        printf("Encontrado \"%s\" y se esperaba \"%s\".\n",$3,$1);
-        return 0;
-      }
-    }
-  | tag_o tags tag_c {int eq=strcmp(tag($1),tag($3)); if(eq!=0){ 
-        error(yylineno);
-        printf("Encontrado \"%s>\" y se esperaba \"%s>\".\n",$3,$1);
-        return 0;
-      }
-    }
-  | ERROR {error(yylineno);
-        printf("Formato de etiqueta no válido.\n");
-        return 0;}
-  ;
-
-tag_o : TAG_O {$$=$1;}
-  | ERROR {error(yylineno+1);
-          printf("Nombre de etiqueta no válido.\n"); return 0;}
-  ;
-
-tag_c : TAG_C {$$=$1;}
-  | ERROR {error(yylineno+1);
-          printf("Nombre de etiqueta no válido.\n"); return 0;}
-  ;
-
-contenido : CONT {}
-  | {error(yylineno+1);
-    printf("Contenido de la etiqueta no válido.\n"); return 0;}
+mods : mods mod {}
+  | mod {}
   ;
 
 
