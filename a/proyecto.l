@@ -1,7 +1,7 @@
 %option yylineno
 %{
 #include <stdlib.h>
-#include "practica2.tab.h"
+#include "proyecto.tab.h"
 %}
 
 nl        [\n\r]

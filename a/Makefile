@@ -1,5 +1,5 @@
-FUENTE = a
-PRUEBA = test1.ex
+FUENTE = proyecto
+PRUEBA = test.ex
 all: compile run
 
 compile:
