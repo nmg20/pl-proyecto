@@ -26,19 +26,25 @@ REAL      "-"?[0-9]+"."[0-9]+
 ATOM      :[a-z_]+
 mod       [A-Z]([A-Z]|[a-z])*
 name      [a-z_]+
+STR       ([^"]|"\""])+
 
 %s FUN
 
 %%
 
-{ws}    {}
-{dm}    {return DM;}
-{def}   {return DEF;}
-{end}   {return END;}
-{mod}   {yylval.str=strdup(yytext);return MOD;}
-{name}  {yylval.str=strdup(yytext);return NAME;}
-{INT}   {yylval.i=atoi(yytext);return INT;}
-{REAL}  {yylval.real=atof(yytext);return REAL;}
-.       {printf("[ERROR: %s]\n",strdup(yytext));}
+{ws}        {}
+{dm}        {printf("DM\n");}
+{def}       {printf("DEF\n");}
+{end}       {printf("END\n");}
+{mod}       {printf("Módulo: %s\n",strdup(yytext));}
+{name}      {printf("Función: %s\n",strdup(yytext));}
+{INT}       {printf("Entero: %i\n",atoi(yytext));}
+{REAL}      {printf("Real: %f\n",atof(yytext));}
+\"{STR}\"   {printf("String: %s\n",strdup(yytext));}
+.           {printf("[ERROR: %s]\n",strdup(yytext));}
+
 %%
 
+int main(){
+    yylex();
+}

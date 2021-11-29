@@ -5,32 +5,36 @@
 int yylex();
 extern int yylineno;
 void yyerror(char const *message);
-static char* tag(char *s){
-  char * r = strdup(s);
-  r=strtok(s,"<");
-  r=strtok(r,"/");
-  r=strtok(r,">");
-  return r;
-}
-static void error(int l){
-  printf("Sintaxis XML incorrecta. Error en linea %i: ",l-1);
-}
-
 %}
 %union{
   char * str;
-  float valFloat;
+  char * atom;
+  int i;
+  float real;
 }
-%token <str> 
-%token DM DE DO END 
-%type <str> mods mod
+%token <str> MOD NAME
+%token <i> INT
+%token <real> REAL
+%token DM DEF DO END CM
+%type <str> modulos modulo funciones funcion
 %start Prog 
 %%
 
-Prog : mods
+Prog : modulos {printf("Formato correcto!\n");}
 
-mods : mods mod {}
-  | mod {}
+modulos : modulos modulo {}
+  | modulo {}
+  ;
+
+modulo : DM funciones END {}
+  |
+  ;
+
+funciones : funciones funcion {}
+  | funcion {}
+  ;
+
+funcion : DEF NAME DO END {}
   ;
 
 

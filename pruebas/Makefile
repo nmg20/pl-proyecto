@@ -1,6 +1,7 @@
-FUENTE = proyecto
-PRUEBA = test.ex
-all: compile
+FUENTE = practica2
+PRUEBA = test1.xml
+
+all: compile run
 
 compile:
 	flex $(FUENTE).l

@@ -1,7 +1,7 @@
 %option yylineno
 %{
 #include <stdlib.h>
-#include "proyecto.tab.h"
+#include "practica2.tab.h"
 %}
 
 ws        [ \t\n\r]
@@ -26,19 +26,15 @@ REAL      "-"?[0-9]+"."[0-9]+
 ATOM      :[a-z_]+
 mod       [A-Z]([A-Z]|[a-z])*
 name      [a-z_]+
-
-%s FUN
-
 %%
-
 {ws}    {}
-{dm}    {return DM;}
-{def}   {return DEF;}
-{end}   {return END;}
-{mod}   {yylval.str=strdup(yytext);return MOD;}
-{name}  {yylval.str=strdup(yytext);return NAME;}
-{INT}   {yylval.i=atoi(yytext);return INT;}
-{REAL}  {yylval.real=atof(yytext);return REAL;}
+{dm}    {printf("DM\n");}
+{def}   {printf("DEF\n");}
+{end}   {printf("END\n");}
+{mod}   {printf("Módulo: %s\n",strdup(yytext));}
+{name}  {printf("Función: %s\n",strdup(yytext));}
+{INT}   {printf("Entero: %i\n",atoi(yytext));}
+{REAL}  {printf("Real: %f\n",atof(yytext));}
 .       {printf("[ERROR: %s]\n",strdup(yytext));}
 %%
 
