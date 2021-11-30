@@ -1,5 +1,7 @@
 FUENTE = proyecto
 PRUEBA = test.ex
+PRUEBA2 = test2.ex
+
 all: compile
 
 compile:
@@ -9,6 +11,9 @@ compile:
 
 run:
 	./z $(PRUEBA)
+
+run2:
+	./z $(PRUEBA2)
 
 clean:
 	rm z lex.yy.c $(FUENTE).tab.c $(FUENTE).tab.h

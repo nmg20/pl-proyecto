@@ -1,3 +1,4 @@
 defmodule Boolean do
-  def a do end
+  def fun(var) do
+  end
 end

@@ -12,12 +12,16 @@ void yyerror(char const *message);
   int i;
   float real;
 }
+%token DOT SLASH CM BO BC EQ PIPE
 %token <str> STR MOD NAME
 %token <atom> ATOM
-%token <i> INT
+%token <i> INT TRUE FALSE
 %token <real> REAL
-%token DM DEF DO DO2 END CM
-%type <str> modulos modulo mod_cab funciones fun_cab funcion
+%token DM DEF DEFP DO DO2 END NIL
+%type <str> def modulos modulo mod_cab funciones fun_cab funcion
+%type <str> parametros param params
+%type <str> body fcall pipe
+%type <i> bool
 %start Prog 
 %%
 
@@ -33,6 +37,10 @@ modulo : mod_cab funciones END {}
 mod_cab : DM MOD DO {}
   ;
 
+def : DEF {}
+  | DEFP {}
+  ;
+
 funciones : funciones funcion {}
   | funcion {}
   ;
@@ -40,9 +48,51 @@ funciones : funciones funcion {}
 funcion : fun_cab END {}
   ;
 
-fun_cab : DEF NAME DO {}
-  | DEF NAME CM DO2 {}
+fun_cab : def NAME parametros DO {}
+  | def NAME parametros CM DO2 {}
   ;
+
+parametros : BO params BC {}
+  | BO BC {}
+  ;
+
+params : params CM param {}
+  | param {}
+  ;
+
+param : NAME {}
+  ;
+
+value : INT {}
+  | REAL {}
+  | STR {}
+  | ATOM {}
+  | bool {}
+  | NIL {}
+  ;
+
+bool : TRUE {}
+  | FALSE {}
+  ;
+
+body : fcall {}
+  | pipe {}
+  ;
+
+fcall : MOD DOT NAME parametros {} 
+  | MOD DOT NAME BO BC {}
+  | MOD DOT NAME {}
+  ;
+
+pipes : fcall PIPE pipes {}
+  | fcall {}
+  ;
+
+pipe : NAME PIPE pipes {}
+  ;
+
+
+
 
 %%
 

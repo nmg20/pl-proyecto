@@ -45,33 +45,53 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    STR = 258,
-    MOD = 259,
-    NAME = 260,
-    ATOM = 261,
-    INT = 262,
-    REAL = 263,
-    DM = 264,
-    DEF = 265,
-    DO = 266,
-    DO2 = 267,
-    END = 268,
-    CM = 269
+    DOT = 258,
+    SLASH = 259,
+    CM = 260,
+    BO = 261,
+    BC = 262,
+    EQ = 263,
+    PIPE = 264,
+    STR = 265,
+    MOD = 266,
+    NAME = 267,
+    ATOM = 268,
+    INT = 269,
+    TRUE = 270,
+    FALSE = 271,
+    REAL = 272,
+    DM = 273,
+    DEF = 274,
+    DEFP = 275,
+    DO = 276,
+    DO2 = 277,
+    END = 278,
+    NIL = 279
   };
 #endif
 /* Tokens.  */
-#define STR 258
-#define MOD 259
-#define NAME 260
-#define ATOM 261
-#define INT 262
-#define REAL 263
-#define DM 264
-#define DEF 265
-#define DO 266
-#define DO2 267
-#define END 268
-#define CM 269
+#define DOT 258
+#define SLASH 259
+#define CM 260
+#define BO 261
+#define BC 262
+#define EQ 263
+#define PIPE 264
+#define STR 265
+#define MOD 266
+#define NAME 267
+#define ATOM 268
+#define INT 269
+#define TRUE 270
+#define FALSE 271
+#define REAL 272
+#define DM 273
+#define DEF 274
+#define DEFP 275
+#define DO 276
+#define DO2 277
+#define END 278
+#define NIL 279
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -85,7 +105,7 @@ union YYSTYPE
   int i;
   float real;
 
-#line 89 "proyecto.tab.h" /* yacc.c:1909  */
+#line 109 "proyecto.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
