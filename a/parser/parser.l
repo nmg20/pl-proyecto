@@ -1,7 +1,6 @@
 %option yylineno
 %{
 #include <stdlib.h>
-#include "proyecto.tab.h"
 %}
 
 ws        [ \t\n\r]
@@ -35,11 +34,13 @@ STR       ([^"]|"\""])+
 {ws}        {}
 {dm}        {printf("DM\n");}
 {def}       {printf("DEF\n");}
+{do}        {printf("DO\n");}
 {end}       {printf("END\n");}
 {mod}       {printf("Módulo: %s\n",strdup(yytext));}
 {name}      {printf("Función: %s\n",strdup(yytext));}
 {INT}       {printf("Entero: %i\n",atoi(yytext));}
 {REAL}      {printf("Real: %f\n",atof(yytext));}
+ {ATOM}     {printf("Átomo: %s\n",strdup(yytext));}
 \"{STR}\"   {printf("String: %s\n",strdup(yytext));}
 .           {printf("[ERROR: %s]\n",strdup(yytext));}
 

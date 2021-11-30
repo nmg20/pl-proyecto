@@ -12,11 +12,12 @@ void yyerror(char const *message);
   int i;
   float real;
 }
-%token <str> MOD NAME
+%token <str> STR MOD NAME
+%token <atom> ATOM
 %token <i> INT
 %token <real> REAL
-%token DM DEF DO END CM
-%type <str> modulos modulo funciones funcion
+%token DM DEF DO DO2 END CM
+%type <str> modulos modulo mod_cab funciones fun_cab funcion
 %start Prog 
 %%
 
@@ -26,17 +27,22 @@ modulos : modulos modulo {}
   | modulo {}
   ;
 
-modulo : DM funciones END {}
-  |
+modulo : mod_cab funciones END {}
+  ;
+
+mod_cab : DM MOD DO {}
   ;
 
 funciones : funciones funcion {}
   | funcion {}
   ;
 
-funcion : DEF NAME DO END {}
+funcion : fun_cab END {}
   ;
 
+fun_cab : DEF NAME DO {}
+  | DEF NAME CM DO2 {}
+  ;
 
 %%
 
