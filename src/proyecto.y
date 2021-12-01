@@ -18,14 +18,14 @@ void yyerror(char const *message);
 %token <i> INT TRUE FALSE
 %token <real> REAL
 %token DM DEF DEFP DO DO2 END NIL
-%type <str> def modulos modulo mod_cab funciones fun_cab funcion
-%type <str> parametros param params
+%type <str> def modulos modulo mod_cab mod funciones fun_cab funcion
+%type <str> parametros param params 
 %type <str> body fcall pipe
 %type <i> bool
-%start Prog 
+%start Program
 %%
 
-Prog : modulos {printf("Formato correcto!\n");}
+Program : modulos {printf("Formato correcto!\n");}
 
 modulos : modulos modulo {}
   | modulo {}
@@ -34,7 +34,11 @@ modulos : modulos modulo {}
 modulo : mod_cab funciones END {}
   ;
 
-mod_cab : DM MOD DO {}
+mod_cab : DM mod DO {}
+  ;
+
+mod : mod DOT MOD {}
+  | MOD {}
   ;
 
 def : DEF {}
@@ -43,6 +47,7 @@ def : DEF {}
 
 funciones : funciones funcion {}
   | funcion {}
+  |
   ;
 
 funcion : fun_cab END {}
@@ -82,6 +87,7 @@ body : fcall {}
 fcall : MOD DOT NAME parametros {} 
   | MOD DOT NAME BO BC {}
   | MOD DOT NAME {}
+  | NAME parametros {}
   ;
 
 pipes : fcall PIPE pipes {}

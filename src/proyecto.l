@@ -24,7 +24,7 @@ eq         "="
 INT        [0-9]+
 REAL       "-"?[0-9]+"."[0-9]+
 ATOM       :[a-z_]+
-mod        [A-Z]([A-Z]|[a-z])*
+mod        [A-Z][A-Za-z]*
 name       [a-z_]+
 STR        ([^"]|"\""])+
 
