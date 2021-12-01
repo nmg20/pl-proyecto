@@ -1,7 +1,7 @@
 defmodule Boolean do
-  @moduledoc "
+  @moduledoc """
   Funcións booleanas implementadas mediante pattern-matching.
-  "
+  """
   @doc """
   Función booleana de negación.
   """

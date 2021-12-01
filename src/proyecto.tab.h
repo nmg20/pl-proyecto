@@ -66,7 +66,11 @@ extern int yydebug;
     DO = 276,
     DO2 = 277,
     END = 278,
-    NIL = 279
+    MDOC = 279,
+    DOC = 280,
+    DOCCONT = 281,
+    ENDDOC = 282,
+    NIL = 283
   };
 #endif
 /* Tokens.  */
@@ -91,7 +95,11 @@ extern int yydebug;
 #define DO 276
 #define DO2 277
 #define END 278
-#define NIL 279
+#define MDOC 279
+#define DOC 280
+#define DOCCONT 281
+#define ENDDOC 282
+#define NIL 283
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -105,7 +113,7 @@ union YYSTYPE
   int i;
   float real;
 
-#line 109 "proyecto.tab.h" /* yacc.c:1909  */
+#line 117 "proyecto.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

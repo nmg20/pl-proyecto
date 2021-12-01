@@ -11,6 +11,10 @@ dm         "defmodule"
 d1         "do"
 d2         "do:"
 end        "end"
+mdoc        "@moduledoc"
+doc        "@doc"
+quotes     \"\"\"
+doccont    [^\"""]
 F          "false"
 T          "true"
 N          "nil"
@@ -28,33 +32,38 @@ mod        [A-Z][A-Za-z]*
 name       [a-z_]+
 STR        ([^"]|"\""])+
 
-%s FUN
+%s FUN DOCF
 
 %%
 
-{ws}      {printf(" ");}
-{dm}      {printf("DM");return DM;}
-{def}     {printf("DEF");return DEF;}
-{dp}      {printf("DEFP");return DEFP;}
-{d1}      {printf("DO\n");return DO;}
-{d2}      {printf("DO:");return DO2;}
-{end}     {printf("END\n");return END;}
-","       {printf(",");return CM;}
-"("       {printf("(");return BO;}
-")"       {printf(")");return BC;}
-"\\"      {printf("\\");return SLASH;}
-"="       {printf("=");return EQ;}
-"|>"      {printf("|>");return PIPE;}
-"."       {printf(".");return DOT;}
-{T}       {printf("true");return TRUE;}
-{F}       {printf("false");return FALSE;}
-{N}       {printf("nil");return NIL;}
-{mod}     {printf("%s",strdup(yytext));yylval.str=strdup(yytext);return MOD;}
-{name}    {printf("%s",strdup(yytext));yylval.str=strdup(yytext);return NAME;}
-{INT}     {printf("%i",atoi(yytext));yylval.i=atoi(yytext);return INT;}
-{REAL}    {printf("%f",atof(yytext));yylval.real=atof(yytext);return REAL;}
-{ATOM}    {printf("%s\n",strdup(yytext));yylval.atom=strdup(yytext);return ATOM;}
-\"{STR}\" {printf("%s\n",strdup(yytext));yylval.str=strdup(yytext);return STR;}
+{ws}      {}
+{dm}      {return DM;}
+{def}     {return DEF;}
+{dp}      {return DEFP;}
+{d1}      {return DO;}
+{d2}      {return DO2;}
+{end}     {return END;}
+{mdoc}{ws}+{quotes}   {BEGIN(DOCF);return MDOC;}
+{doc}{ws}+{quotes}    {BEGIN(DOCF);return DOC;}
+<DOCF>{ws}      {}
+<DOCF>{doccont}         {return DOCCONT;}
+<DOCF>{quotes}  {BEGIN(INITIAL);return ENDDOC;}
+","       {return CM;}
+[(]       {return BO;}
+[)]       {return BC;}
+"\\"      {return SLASH;}
+"="       {return EQ;}
+"|>"      {return PIPE;}
+"."       {return DOT;}
+{T}       {return TRUE;}
+{F}       {return FALSE;}
+{N}       {return NIL;}
+{mod}     {yylval.str=strdup(yytext);return MOD;}
+{name}    {yylval.str=strdup(yytext);return NAME;}
+{INT}     {yylval.i=atoi(yytext);return INT;}
+{REAL}    {yylval.real=atof(yytext);return REAL;}
+{ATOM}    {yylval.atom=strdup(yytext);return ATOM;}
+\"{STR}\" {yylval.str=strdup(yytext);return STR;}
 .         {printf("[ERROR: %s]\n",strdup(yytext));}
 %%
 
