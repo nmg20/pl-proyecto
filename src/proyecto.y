@@ -53,11 +53,12 @@ docs : docs DOCCONT {}
   | DOCCONT {}
   ;
 
-funciones : funciones documentacion funcion {}
-  | documentacion funcion {}
+funciones : funciones funcion {}
+  | funcion {}
   ;
 
-funcion : fun_cab cuerpo END {}
+funcion : documentacion fun_cab cuerpo END {}
+  | fun_cab cuerpo END {}
   ;
 
 fun_cab : def NAME parametros DO {}
@@ -100,6 +101,7 @@ listcont : listcont CM var {}
   ;
 
 cuerpo : lista {}
+  | {}
   ;
 
 
