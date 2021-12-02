@@ -23,6 +23,8 @@
     - condicionales
     - recursividad
     - Keywords y Maps(?)
+    - alias, import, require, use
+    -typespec
 
   ### **IMPORTANTE**
     - Diferencia entre variables y valores

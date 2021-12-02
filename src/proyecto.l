@@ -49,8 +49,10 @@ STR        ([^"]|"\""])+
 <DOCF>{doccont}         {return DOCCONT;}
 <DOCF>{quotes}  {BEGIN(INITIAL);return ENDDOC;}
 ","       {return CM;}
-[(]       {return BO;}
-[)]       {return BC;}
+[(]       {return PO;}
+[)]       {return PC;}
+"["       {return BO;}
+"]"       {return BC;}
 "\\"      {return SLASH;}
 "="       {return EQ;}
 "|>"      {return PIPE;}

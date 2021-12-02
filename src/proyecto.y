@@ -12,14 +12,15 @@ void yyerror(char const *message);
   int i;
   float real;
 }
-%token DOT SLASH CM BO BC EQ PIPE
+%token DOT SLASH CM PO PC BO BC EQ PIPE
 %token <str> STR MOD NAME
 %token <atom> ATOM
 %token <i> INT TRUE FALSE
 %token <real> REAL
 %token DM DEF DEFP DO DO2 END MDOC DOC DOCCONT ENDDOC NIL
-%type <str> def modulos modulo mod_cab mod documentacion docs funciones fun_cab funcion
-%type <str> parametros param params
+%type <str> def modulos modulo mod_cab mod documentacion docs funciones fun_cab funcion cuerpo
+%type <str> parametros param params var lista listcont
+%type <str> bool
 %start Program
 %%
 
@@ -43,15 +44,9 @@ def : DEF {}
   | DEFP {}
   ;
 
-documentacion : mdoc {}
-  | mdoc doc {}
-  | doc {}
-  ;
-
-mdoc : MDOC docs ENDDOC {}
-  ;
-
-doc : DOC docs ENDDOC {}
+documentacion : MDOC docs ENDDOC {}
+  | MDOC docs ENDDOC DOC docs ENDDOC {}
+  | DOC docs ENDDOC {}
   ;
 
 docs : docs DOCCONT {}
@@ -62,15 +57,15 @@ funciones : funciones documentacion funcion {}
   | documentacion funcion {}
   ;
 
-funcion : fun_cab END {}
+funcion : fun_cab cuerpo END {}
   ;
 
 fun_cab : def NAME parametros DO {}
   | def NAME parametros CM DO2 {}
   ;
 
-parametros : BO params BC {}
-  | BO BC {}
+parametros : PO params PC {}
+  | PO PC {}
   ;
 
 params : params CM param {}
@@ -79,6 +74,35 @@ params : params CM param {}
 
 param : NAME {}
   ;
+
+var : NAME {}
+  | value {}
+  ;
+
+value : INT {}
+  | REAL {}
+  | STR {}
+  | ATOM {}
+  | bool {}
+  | NIL {}
+  ;
+
+bool : TRUE {}
+  | FALSE {}
+  ;
+
+lista : BO BC {}
+  | BO listcont BC {}
+  ;
+
+listcont : listcont CM var {}
+  | var {}
+  ;
+
+cuerpo : lista {}
+  ;
+
+
 
 
 %%

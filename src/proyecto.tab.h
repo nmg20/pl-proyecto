@@ -48,58 +48,62 @@ extern int yydebug;
     DOT = 258,
     SLASH = 259,
     CM = 260,
-    BO = 261,
-    BC = 262,
-    EQ = 263,
-    PIPE = 264,
-    STR = 265,
-    MOD = 266,
-    NAME = 267,
-    ATOM = 268,
-    INT = 269,
-    TRUE = 270,
-    FALSE = 271,
-    REAL = 272,
-    DM = 273,
-    DEF = 274,
-    DEFP = 275,
-    DO = 276,
-    DO2 = 277,
-    END = 278,
-    MDOC = 279,
-    DOC = 280,
-    DOCCONT = 281,
-    ENDDOC = 282,
-    NIL = 283
+    PO = 261,
+    PC = 262,
+    BO = 263,
+    BC = 264,
+    EQ = 265,
+    PIPE = 266,
+    STR = 267,
+    MOD = 268,
+    NAME = 269,
+    ATOM = 270,
+    INT = 271,
+    TRUE = 272,
+    FALSE = 273,
+    REAL = 274,
+    DM = 275,
+    DEF = 276,
+    DEFP = 277,
+    DO = 278,
+    DO2 = 279,
+    END = 280,
+    MDOC = 281,
+    DOC = 282,
+    DOCCONT = 283,
+    ENDDOC = 284,
+    NIL = 285
   };
 #endif
 /* Tokens.  */
 #define DOT 258
 #define SLASH 259
 #define CM 260
-#define BO 261
-#define BC 262
-#define EQ 263
-#define PIPE 264
-#define STR 265
-#define MOD 266
-#define NAME 267
-#define ATOM 268
-#define INT 269
-#define TRUE 270
-#define FALSE 271
-#define REAL 272
-#define DM 273
-#define DEF 274
-#define DEFP 275
-#define DO 276
-#define DO2 277
-#define END 278
-#define MDOC 279
-#define DOC 280
-#define DOCCONT 281
-#define ENDDOC 282
-#define NIL 283
+#define PO 261
+#define PC 262
+#define BO 263
+#define BC 264
+#define EQ 265
+#define PIPE 266
+#define STR 267
+#define MOD 268
+#define NAME 269
+#define ATOM 270
+#define INT 271
+#define TRUE 272
+#define FALSE 273
+#define REAL 274
+#define DM 275
+#define DEF 276
+#define DEFP 277
+#define DO 278
+#define DO2 279
+#define END 280
+#define MDOC 281
+#define DOC 282
+#define DOCCONT 283
+#define ENDDOC 284
+#define NIL 285
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -113,7 +117,7 @@ union YYSTYPE
   int i;
   float real;
 
-#line 117 "proyecto.tab.h" /* yacc.c:1909  */
+#line 121 "proyecto.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
