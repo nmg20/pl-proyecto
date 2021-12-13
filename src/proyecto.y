@@ -18,7 +18,7 @@ void yyerror(char const *message);
 %token <i> INT TRUE FALSE
 %token <real> REAL
 %token DM DEF DEFP DO DO2 END MDOC DOC DOCCONT ENDDOC NIL
-%type <str> def modulos modulo mod_cab mod documentacion docs funciones fun_cab funcion cuerpo
+%type <str> def modulos modulo mod_cab mod documentacion docs funciones funcion cuerpo
 %type <str> parametros param params var lista listcont
 %type <str> bool
 %start Program
@@ -47,6 +47,7 @@ def : DEF {}
 documentacion : MDOC docs ENDDOC {}
   | MDOC docs ENDDOC DOC docs ENDDOC {}
   | DOC docs ENDDOC {}
+  |
   ;
 
 docs : docs DOCCONT {}
@@ -57,12 +58,8 @@ funciones : funciones funcion {}
   | funcion {}
   ;
 
-funcion : documentacion fun_cab cuerpo END {}
-  | fun_cab cuerpo END {}
-  ;
-
-fun_cab : def NAME parametros DO {}
-  | def NAME parametros CM DO2 {}
+funcion : def NAME parametros DO cuerpo END {}
+  | def NAME parametros CM DO2 cuerpo {}
   ;
 
 parametros : PO params PC {}
