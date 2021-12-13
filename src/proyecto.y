@@ -13,6 +13,7 @@ void yyerror(char const *message);
   float real;
 }
 %token DOT SLASH CM PO PC BO BC TO TC EQ PIPE L_SEP
+%token MOD_CALL ALIAS
 %token <str> STR MOD NAME
 %token <atom> ATOM
 %token <i> INT TRUE FALSE
@@ -27,10 +28,10 @@ void yyerror(char const *message);
 Program : modulo {printf("Formato correcto!\n");}
 
 
-modulo : mod_cab funciones END {}
+modulo : mod_cab moddoc funciones END {}
   ;
 
-mod_cab : DM mod DO moddoc {}
+mod_cab : DM mod DO {}
   ;
 
 mod : mod DOT MOD {}

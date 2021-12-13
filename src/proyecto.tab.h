@@ -57,25 +57,27 @@ extern int yydebug;
     EQ = 267,
     PIPE = 268,
     L_SEP = 269,
-    STR = 270,
-    MOD = 271,
-    NAME = 272,
-    ATOM = 273,
-    INT = 274,
-    TRUE = 275,
-    FALSE = 276,
-    REAL = 277,
-    DM = 278,
-    DEF = 279,
-    DEFP = 280,
-    DO = 281,
-    DO2 = 282,
-    END = 283,
-    MDOC = 284,
-    DOC = 285,
-    DOCCONT = 286,
-    ENDDOC = 287,
-    NIL = 288
+    MOD_CALL = 270,
+    ALIAS = 271,
+    STR = 272,
+    MOD = 273,
+    NAME = 274,
+    ATOM = 275,
+    INT = 276,
+    TRUE = 277,
+    FALSE = 278,
+    REAL = 279,
+    DM = 280,
+    DEF = 281,
+    DEFP = 282,
+    DO = 283,
+    DO2 = 284,
+    END = 285,
+    MDOC = 286,
+    DOC = 287,
+    DOCCONT = 288,
+    ENDDOC = 289,
+    NIL = 290
   };
 #endif
 /* Tokens.  */
@@ -91,25 +93,27 @@ extern int yydebug;
 #define EQ 267
 #define PIPE 268
 #define L_SEP 269
-#define STR 270
-#define MOD 271
-#define NAME 272
-#define ATOM 273
-#define INT 274
-#define TRUE 275
-#define FALSE 276
-#define REAL 277
-#define DM 278
-#define DEF 279
-#define DEFP 280
-#define DO 281
-#define DO2 282
-#define END 283
-#define MDOC 284
-#define DOC 285
-#define DOCCONT 286
-#define ENDDOC 287
-#define NIL 288
+#define MOD_CALL 270
+#define ALIAS 271
+#define STR 272
+#define MOD 273
+#define NAME 274
+#define ATOM 275
+#define INT 276
+#define TRUE 277
+#define FALSE 278
+#define REAL 279
+#define DM 280
+#define DEF 281
+#define DEFP 282
+#define DO 283
+#define DO2 284
+#define END 285
+#define MDOC 286
+#define DOC 287
+#define DOCCONT 288
+#define ENDDOC 289
+#define NIL 290
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -123,7 +127,7 @@ union YYSTYPE
   int i;
   float real;
 
-#line 127 "proyecto.tab.h" /* yacc.c:1909  */
+#line 131 "proyecto.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

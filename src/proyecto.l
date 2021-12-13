@@ -13,6 +13,7 @@ d2         "do:"
 end        "end"
 mdoc        "@moduledoc"
 doc        "@doc"
+mod_call   "import"|"use"|"require"
 quotes     \"\"\"
 doccont    [^\"""]
 F          "false"
@@ -65,6 +66,8 @@ STR        ([^"]|"\""])+
 {T}       {return TRUE;}
 {F}       {return FALSE;}
 {N}       {return NIL;}
+"import"|"use"|"require"{ws}{mod} {return MOD_CALL;}
+"alias"{ws}{mod}", as:"{mod} {return ALIAS;}
 {mod}     {yylval.str=strdup(yytext);return MOD;}
 {name}    {yylval.str=strdup(yytext);return NAME;}
 {INT}     {yylval.i=atoi(yytext);return INT;}

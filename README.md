@@ -12,7 +12,7 @@
     - nombre de módulo y de función
     - identificación de documentaciones
   ### Pendientes:
-    - Tipos soportados: Numéricos, Octal, Hexadecimal, Binary, Átomos, Booleanos, Strings, Binarios, Listas, Tuplas
+    - Tipos soportados: Numéricos, Octal, Hexadecimal, (*Binary*), Átomos, Booleanos, Strings, (*Binarios*), Listas, Tuplas
     - Variables -> declaración
     - Operadores -> aritméticos
                  -> lógicos
