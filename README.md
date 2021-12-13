@@ -17,12 +17,12 @@
     - Operadores -> aritméticos
                  -> lógicos
                  -> comparación
-                 -> (No incluidos) Bitwise
+                 -> (*(No incluidos) Bitwise*)
     - Cuerpo de funciones
-    - Pattern-matching(?)
+    - (*Pattern-matching(?)*)
     - condicionales
-    - recursividad
-    - Keywords y Maps(?)
+    - (*recursividad*)
+    - (*Keywords y Maps(?)*)
     - alias, import, require, use
     -typespec
 
