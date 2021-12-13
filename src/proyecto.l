@@ -16,6 +16,7 @@ doc        "@doc"
 mod_call   "import"|"use"|"require"
 quotes     \"\"\"
 doccont    [^\"""]
+ifcont     [^"do"]
 F          "false"
 T          "true"
 N          "nil"
@@ -35,7 +36,7 @@ mod        [A-Z][A-Za-z]*
 name       [a-z_]+
 STR        ([^"]|"\""])+
 
-%s FUN DOCF
+%s FUN DOCF 
 
 %%
 
@@ -48,9 +49,9 @@ STR        ([^"]|"\""])+
 {end}     {return END;}
 {mdoc}{ws}+{quotes}   {BEGIN(DOCF);return MDOC;}
 {doc}{ws}+{quotes}    {BEGIN(DOCF);return DOC;}
-<DOCF>{ws}      {}
-<DOCF>{doccont}         {return DOCCONT;}
-<DOCF>{quotes}  {BEGIN(INITIAL);return ENDDOC;}
+<DOCF>{ws}               {}
+<DOCF>{doccont}+         {return DOCCONT;}
+<DOCF>{quotes}          {BEGIN(INITIAL);return ENDDOC;}
 ","       {return CM;}
 [(]       {return PO;}
 [)]       {return PC;}
@@ -62,11 +63,17 @@ STR        ([^"]|"\""])+
 "="       {return EQ;}
 "|>"      {return PIPE;}
 "."       {return DOT;}
+"->"      {return AR;}
+"_"       {return WC;}
 {or}      {printf("List Separator\n");return L_SEP;}
 {T}       {return TRUE;}
 {F}       {return FALSE;}
 {N}       {return NIL;}
 "import"|"use"|"require"{ws}{mod} {return MOD_CALL;}
+"if"|"unless"      {return IF;}
+"else"   {return ELSE;}
+"cond"    {return COND;}
+"case"    {return CASE;}
 "alias"{ws}{mod}", as:"{mod} {return ALIAS;}
 {mod}     {yylval.str=strdup(yytext);return MOD;}
 {name}    {yylval.str=strdup(yytext);return NAME;}

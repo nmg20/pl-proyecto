@@ -56,28 +56,38 @@ extern int yydebug;
     TC = 266,
     EQ = 267,
     PIPE = 268,
-    L_SEP = 269,
-    MOD_CALL = 270,
-    ALIAS = 271,
-    STR = 272,
-    MOD = 273,
-    NAME = 274,
-    ATOM = 275,
-    INT = 276,
-    TRUE = 277,
-    FALSE = 278,
-    REAL = 279,
-    DM = 280,
-    DEF = 281,
-    DEFP = 282,
-    DO = 283,
-    DO2 = 284,
-    END = 285,
-    MDOC = 286,
-    DOC = 287,
-    DOCCONT = 288,
-    ENDDOC = 289,
-    NIL = 290
+    AR = 269,
+    L_SEP = 270,
+    WC = 271,
+    MOD_CALL = 272,
+    ALIAS = 273,
+    IF = 274,
+    ELSE = 275,
+    COND = 276,
+    CASE = 277,
+    GUARD = 278,
+    IF1 = 279,
+    IF2 = 280,
+    STR = 281,
+    MOD = 282,
+    NAME = 283,
+    EXP = 284,
+    ATOM = 285,
+    INT = 286,
+    TRUE = 287,
+    FALSE = 288,
+    REAL = 289,
+    DM = 290,
+    DEF = 291,
+    DEFP = 292,
+    DO = 293,
+    DO2 = 294,
+    END = 295,
+    MDOC = 296,
+    DOC = 297,
+    DOCCONT = 298,
+    ENDDOC = 299,
+    NIL = 300
   };
 #endif
 /* Tokens.  */
@@ -92,28 +102,38 @@ extern int yydebug;
 #define TC 266
 #define EQ 267
 #define PIPE 268
-#define L_SEP 269
-#define MOD_CALL 270
-#define ALIAS 271
-#define STR 272
-#define MOD 273
-#define NAME 274
-#define ATOM 275
-#define INT 276
-#define TRUE 277
-#define FALSE 278
-#define REAL 279
-#define DM 280
-#define DEF 281
-#define DEFP 282
-#define DO 283
-#define DO2 284
-#define END 285
-#define MDOC 286
-#define DOC 287
-#define DOCCONT 288
-#define ENDDOC 289
-#define NIL 290
+#define AR 269
+#define L_SEP 270
+#define WC 271
+#define MOD_CALL 272
+#define ALIAS 273
+#define IF 274
+#define ELSE 275
+#define COND 276
+#define CASE 277
+#define GUARD 278
+#define IF1 279
+#define IF2 280
+#define STR 281
+#define MOD 282
+#define NAME 283
+#define EXP 284
+#define ATOM 285
+#define INT 286
+#define TRUE 287
+#define FALSE 288
+#define REAL 289
+#define DM 290
+#define DEF 291
+#define DEFP 292
+#define DO 293
+#define DO2 294
+#define END 295
+#define MDOC 296
+#define DOC 297
+#define DOCCONT 298
+#define ENDDOC 299
+#define NIL 300
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -127,7 +147,7 @@ union YYSTYPE
   int i;
   float real;
 
-#line 131 "proyecto.tab.h" /* yacc.c:1909  */
+#line 151 "proyecto.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

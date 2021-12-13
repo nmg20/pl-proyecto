@@ -5,26 +5,23 @@
 # Tasks Proyecto Final PL
   
 ## *Léxico básico*
-  ### Hechos:   [1/12]
+  ### Hechos:   [13/12]
     - def, defmodule, do, end, when, and, or, not
     - true, false, nil, fn, ->
-    - INT, ATOM
+    - INT, ATOM, STRING, REAL, LISTAS, TUPLAS
     - nombre de módulo y de función
     - identificación de documentaciones
+    - condicionales/decisión
+    - Cuerpo de funciones
   ### Pendientes:
     - Tipos soportados: Numéricos, Octal, Hexadecimal, (*Binary*), Átomos, Booleanos, Strings, (*Binarios*), Listas, Tuplas
-    - Variables -> declaración
-    - Operadores -> aritméticos
-                 -> lógicos
-                 -> comparación
+    - (*Variables -> declaración*)
+    - Operadores -> aritméticos (+,-,*,/,div,rem)
+                 -> lógicos (||,&&,!, not, or)
+                 -> comparación (==,!=,===,!==,<=,>=,>,<)
                  -> (*(No incluidos) Bitwise*)
-    - Cuerpo de funciones
-    - (*Pattern-matching(?)*)
-    - condicionales
-    - (*recursividad*)
-    - (*Keywords y Maps(?)*)
     - alias, import, require, use
-    -typespec
+    - typespec
 
   ### **IMPORTANTE**
     - Diferencia entre variables y valores

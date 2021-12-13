@@ -16,6 +16,7 @@ A         "and"
 O         "or"
 n         "not"
 f         "fn"
+if        "if"
 ar        "->"
 eq        "="
 po        [(]
@@ -27,15 +28,19 @@ mod       [A-Z]([A-Z]|[a-z])*
 name      [a-z_]+
 STR       ([^"]|"\""])+
 
-%s FUN
+%s FUN IF
 
 %%
 
 {ws}        {}
-{dm}        {printf("DM\n");}
-{def}       {printf("DEF\n");}
+{dm}        {printf("DM");}
+{def}       {printf("DEF");}
 {do}        {printf("DO\n");}
 {end}       {printf("END\n");}
+{if}        {printf("IF");BEGIN(IF);}
+<IF>."do"     {printf("%s DO\n",strdup(yytext));}
+<IF>"else"   {printf("%s ELSE\n",strdup(yytext));}
+<IF>"end"    {BEGIN(INITIAL);printf("%s END\n",strdup(yytext));}
 {mod}       {printf("Módulo: %s\n",strdup(yytext));}
 {name}      {printf("Función: %s\n",strdup(yytext));}
 {INT}       {printf("Entero: %i\n",atoi(yytext));}

@@ -12,21 +12,21 @@ void yyerror(char const *message);
   int i;
   float real;
 }
-%token DOT SLASH CM PO PC BO BC TO TC EQ PIPE L_SEP
+%token DOT SLASH CM PO PC BO BC TO TC EQ PIPE AR L_SEP WC
 %token MOD_CALL ALIAS
-%token <str> STR MOD NAME
+%token IF ELSE COND CASE GUARD IF1 IF2
+%token <str> STR MOD NAME EXP
 %token <atom> ATOM
 %token <i> INT TRUE FALSE
 %token <real> REAL
 %token DM DEF DEFP DO DO2 END MDOC DOC DOCCONT ENDDOC NIL
 %type <str> def modulo mod_cab mod moddoc fdoc docs funciones funcion cuerpo
 %type <str> parametros param params var lista listcont
-%type <str> bool tupla tcont
+%type <str> bool tupla tcont if cond case
 %start Program
 %%
 
 Program : modulo {printf("Formato correcto!\n");}
-
 
 modulo : mod_cab moddoc funciones END {}
   ;
@@ -85,6 +85,8 @@ value : INT {}
   | NIL {}
   | lista {}
   | tupla {}
+  | condicion {}
+  | WC {}
   ;
 
 bool : TRUE {}
@@ -106,6 +108,25 @@ tupla : TO TC {}
 
 tcont : tcont CM var {}
   | var {}
+  ;
+
+condicion : if {}
+  | cond {}
+  | case {}
+  ;
+
+if : IF var DO var ELSE var END {}
+  | IF var DO var END {}
+  ;
+
+cond : COND DO conds END {}
+  ;
+
+conds : conds var AR var {}
+  | var AR var {}
+  ;
+
+case : CASE var DO conds END {}
   ;
 
 cuerpo : cuerpo value

@@ -1,6 +1,6 @@
 defmodule Boolean do
   @moduledoc """
-    á
+    Funcións booleanas implementadas mediante pattern-matching.
   """
   @doc """
     a.
@@ -10,6 +10,7 @@ defmodule Boolean do
     [1,2,3]
     "aaa"
     1.2
+    1
     :a
     true
     false
@@ -18,6 +19,5 @@ defmodule Boolean do
   @doc """
     d.
   """
-  def fun(var) do
-  end
+  def fun(var), do: 1
 end
