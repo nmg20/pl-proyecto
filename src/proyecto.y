@@ -12,28 +12,25 @@ void yyerror(char const *message);
   int i;
   float real;
 }
-%token DOT SLASH CM PO PC BO BC EQ PIPE
+%token DOT SLASH CM PO PC BO BC TO TC EQ PIPE L_SEP
 %token <str> STR MOD NAME
 %token <atom> ATOM
 %token <i> INT TRUE FALSE
 %token <real> REAL
 %token DM DEF DEFP DO DO2 END MDOC DOC DOCCONT ENDDOC NIL
-%type <str> def modulos modulo mod_cab mod documentacion docs funciones funcion cuerpo
+%type <str> def modulo mod_cab mod moddoc fdoc docs funciones funcion cuerpo
 %type <str> parametros param params var lista listcont
-%type <str> bool
+%type <str> bool tupla tcont
 %start Program
 %%
 
-Program : modulos {printf("Formato correcto!\n");}
+Program : modulo {printf("Formato correcto!\n");}
 
-modulos : modulos modulo {}
-  | modulo {}
-  ;
 
 modulo : mod_cab funciones END {}
   ;
 
-mod_cab : DM mod DO {}
+mod_cab : DM mod DO moddoc {}
   ;
 
 mod : mod DOT MOD {}
@@ -44,9 +41,11 @@ def : DEF {}
   | DEFP {}
   ;
 
-documentacion : MDOC docs ENDDOC {}
-  | MDOC docs ENDDOC DOC docs ENDDOC {}
-  | DOC docs ENDDOC {}
+moddoc : MDOC docs ENDDOC {}
+  |
+  ;
+
+fdoc : DOC docs ENDDOC {}
   |
   ;
 
@@ -54,8 +53,8 @@ docs : docs DOCCONT {}
   | DOCCONT {}
   ;
 
-funciones : funciones funcion {}
-  | funcion {}
+funciones : funciones fdoc funcion {}
+  | fdoc funcion {}
   ;
 
 funcion : def NAME parametros DO cuerpo END {}
@@ -83,6 +82,8 @@ value : INT {}
   | ATOM {}
   | bool {}
   | NIL {}
+  | lista {}
+  | tupla {}
   ;
 
 bool : TRUE {}
@@ -91,13 +92,22 @@ bool : TRUE {}
 
 lista : BO BC {}
   | BO listcont BC {}
+  | BO var L_SEP var BC {}
   ;
 
 listcont : listcont CM var {}
   | var {}
   ;
 
-cuerpo : lista {}
+tupla : TO TC {}
+  | TO tcont TC {}
+  ;
+
+tcont : tcont CM var {}
+  | var {}
+  ;
+
+cuerpo : cuerpo value
   | {}
   ;
 

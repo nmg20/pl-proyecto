@@ -52,27 +52,30 @@ extern int yydebug;
     PC = 262,
     BO = 263,
     BC = 264,
-    EQ = 265,
-    PIPE = 266,
-    STR = 267,
-    MOD = 268,
-    NAME = 269,
-    ATOM = 270,
-    INT = 271,
-    TRUE = 272,
-    FALSE = 273,
-    REAL = 274,
-    DM = 275,
-    DEF = 276,
-    DEFP = 277,
-    DO = 278,
-    DO2 = 279,
-    END = 280,
-    MDOC = 281,
-    DOC = 282,
-    DOCCONT = 283,
-    ENDDOC = 284,
-    NIL = 285
+    TO = 265,
+    TC = 266,
+    EQ = 267,
+    PIPE = 268,
+    L_SEP = 269,
+    STR = 270,
+    MOD = 271,
+    NAME = 272,
+    ATOM = 273,
+    INT = 274,
+    TRUE = 275,
+    FALSE = 276,
+    REAL = 277,
+    DM = 278,
+    DEF = 279,
+    DEFP = 280,
+    DO = 281,
+    DO2 = 282,
+    END = 283,
+    MDOC = 284,
+    DOC = 285,
+    DOCCONT = 286,
+    ENDDOC = 287,
+    NIL = 288
   };
 #endif
 /* Tokens.  */
@@ -83,27 +86,30 @@ extern int yydebug;
 #define PC 262
 #define BO 263
 #define BC 264
-#define EQ 265
-#define PIPE 266
-#define STR 267
-#define MOD 268
-#define NAME 269
-#define ATOM 270
-#define INT 271
-#define TRUE 272
-#define FALSE 273
-#define REAL 274
-#define DM 275
-#define DEF 276
-#define DEFP 277
-#define DO 278
-#define DO2 279
-#define END 280
-#define MDOC 281
-#define DOC 282
-#define DOCCONT 283
-#define ENDDOC 284
-#define NIL 285
+#define TO 265
+#define TC 266
+#define EQ 267
+#define PIPE 268
+#define L_SEP 269
+#define STR 270
+#define MOD 271
+#define NAME 272
+#define ATOM 273
+#define INT 274
+#define TRUE 275
+#define FALSE 276
+#define REAL 277
+#define DM 278
+#define DEF 279
+#define DEFP 280
+#define DO 281
+#define DO2 282
+#define END 283
+#define MDOC 284
+#define DOC 285
+#define DOCCONT 286
+#define ENDDOC 287
+#define NIL 288
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -117,7 +123,7 @@ union YYSTYPE
   int i;
   float real;
 
-#line 121 "proyecto.tab.h" /* yacc.c:1909  */
+#line 127 "proyecto.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

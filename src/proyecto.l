@@ -25,6 +25,8 @@ n          "not"
 f          "fn"
 ar         "->"
 eq         "="
+or         "|"[^">"]
+sum        "+"
 INT        [0-9]+
 REAL       "-"?[0-9]+"."[0-9]+
 ATOM       :[a-z_]+
@@ -51,12 +53,15 @@ STR        ([^"]|"\""])+
 ","       {return CM;}
 [(]       {return PO;}
 [)]       {return PC;}
+[{]       {return TO;}
+[}]       {return TC;}
 "["       {return BO;}
 "]"       {return BC;}
 "\\"      {return SLASH;}
 "="       {return EQ;}
 "|>"      {return PIPE;}
 "."       {return DOT;}
+{or}      {printf("List Separator\n");return L_SEP;}
 {T}       {return TRUE;}
 {F}       {return FALSE;}
 {N}       {return NIL;}
