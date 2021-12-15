@@ -14,17 +14,19 @@
     - identificación de documentaciones
     - condicionales/decisión
     - Cuerpo de funciones
+    - Invocación de funciones
     - Operadores 
               -> aritméticos (,-,*,/,div,rem)
               -> lógicos (||,&&,!, not, or)
+              -> comparación (==,!=,<=,>=,>,<)
   ### Pendientes:
     - Tipos soportados: Numéricos, Octal, Hexadecimal, (*Binary*), Átomos, Booleanos, Strings, (*Binarios*), Listas, Tuplas
     - (*Variables -> declaración*)
     - Operadores 
-                 -> comparación (==,!=,===,!==,<=,>=,>,<)
                  -> misc. (String: <>), (Listas: ++, --, in)
                  -> (*(No incluidos) Bitwise*)
     - alias, import, require, use
+    - asignación de variables
     - typespec
     - Maps y keyword lists
     - Binaries

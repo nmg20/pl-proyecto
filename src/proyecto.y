@@ -10,11 +10,13 @@ void yyerror(char const *message);
   char * str;
   char * atom;
   int i;
+  int bool;
   float real;
 }
-%token DOT SLASH CM PO PC BO BC TO TC EQ PIPE AR L_SEP WC 
+%token DOT SLASH CM PO PC BO BC TO TC PIPE AR L_SEP WC 
 %token PLUS MINUS MULT DIV1 DIV2 REM
 %token AND1 AND2 OR1 OR2 NOT1 NOT2
+%token EQ NEQ LT LTE GT GTE
 %token MOD_CALL ALIAS
 %token IF ELSE COND CASE GUARD IF1 IF2
 %token <str> STR MOD NAME EXP CHRL
@@ -25,7 +27,7 @@ void yyerror(char const *message);
 %type <str> def modulo mod_cab mod moddoc fdoc docs funciones funcion cuerpo
 %type <str> parametros param params expr lista listcont
 %type <str> num bool tupla tcont if cond case op
-%type <i> op_ar 
+%type <i> op_ar
 %start Program
 %%
 
@@ -76,14 +78,20 @@ params : params CM param {}
 param : expr {}
   ;
 
-expr : NAME {}
-  | value {}
+expr : var {}
   | condicion {}
   | op {}
+  | fcall {}
+  | PO expr PC {}
+  ;
+
+var : NAME {}
+  | value {}
   ;
 
 op : op_ar {}
   | op_log {}
+  | op_comp {}
   ;
 
 op_ar : num {}
@@ -105,12 +113,21 @@ op_log : bool {}
   | NOT2 op {}
   ;
 
+op_comp : expr EQ expr {}
+  | expr NEQ expr {}
+  | expr LT expr {}
+  | expr LTE expr {}
+  | expr GT expr {}
+  | expr GTE expr {}
+  ;
+
 num : NAME {}
   | INT {}
   | REAL {}
   ;
 
-value : num {}
+value : INT {}
+  | REAL {}
   | STR {}
   | ATOM {}
   | bool {}
@@ -159,6 +176,10 @@ conds : conds expr AR expr {}
   ;
 
 case : CASE expr DO conds END {}
+  ;
+
+fcall : MOD DOT NAME params {}
+  | NAME parametros {}
   ;
 
 cuerpo : cuerpo expr
