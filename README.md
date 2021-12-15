@@ -31,6 +31,8 @@
     - Maps y keyword lists
     - Binaries
     - comprobar invocación de fun. existente/Módulo
+    - guardias
+    - registro de funciones y variables
   ### No Contemplados:
     - AST
     - Sigils/String match
@@ -39,7 +41,6 @@
     - Bitstrings
 
   ### **IMPORTANTE**
-    - 
     - Diferencia entre variables y valores
     - Mecanismo de comprobación de repetición en funciones y variables
 
@@ -48,3 +49,4 @@
     - Lectura correcta desde fichero
     - Comprobación de módulos y funciones simples
     - Lectura y comprobación de documentación
+    - La documentación tiene que ir entre tres comillas dobles

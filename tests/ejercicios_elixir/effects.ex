@@ -1,7 +1,7 @@
 defmodule Effects do
-  @moduledoc """
+  @moduledoc "
   Funcións que provocan efectos colaterais.
-  """
+  "
   defp aux_print(1, s), do: IO.puts("1" <> s)
 
   defp aux_print(n, s) do

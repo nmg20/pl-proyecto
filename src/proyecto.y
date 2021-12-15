@@ -13,7 +13,7 @@ void yyerror(char const *message);
   int bool;
   float real;
 }
-%token DOT SLASH CM PO PC BO BC TO TC PIPE AR L_SEP WC 
+%token DOT SLASH CM PO PC BO BC TO TC PIPE AR L_SEP WC
 %token PLUS MINUS MULT DIV1 DIV2 REM
 %token AND1 AND2 OR1 OR2 NOT1 NOT2
 %token EQ NEQ LT LTE GT GTE
@@ -26,7 +26,7 @@ void yyerror(char const *message);
 %token DM DEF DEFP DO DO2 END MDOC DOC DOCCONT ENDDOC NIL
 %type <str> def modulo mod_cab mod moddoc fdoc docs funciones funcion cuerpo
 %type <str> parametros param params expr lista listcont
-%type <str> num bool tupla tcont if cond case op
+%type <str> num bool tupla if cond case op
 %type <i> op_ar
 %start Program
 %%
@@ -152,11 +152,7 @@ listcont : listcont CM expr {}
   ;
 
 tupla : TO TC {}
-  | TO tcont TC {}
-  ;
-
-tcont : tcont CM expr {}
-  | expr {}
+  | TO listcont TC {}
   ;
 
 condicion : if {}

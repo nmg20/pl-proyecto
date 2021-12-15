@@ -45,6 +45,7 @@ CHARL      ([^'']|"\'"])+
 {d1}      {return DO;}
 {d2}      {return DO2;}
 {end}     {return END;}
+"#".      {}
 {mdoc}{ws}+{quotes}   {BEGIN(DOCF);return MDOC;}
 {doc}{ws}+{quotes}    {BEGIN(DOCF);return DOC;}
 <DOCF>{ws}               {}
