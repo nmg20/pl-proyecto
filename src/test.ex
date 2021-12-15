@@ -1,23 +1,5 @@
 defmodule Boolean do
-  @moduledoc """
-    Funcións booleanas implementadas mediante pattern-matching.
-  """
-  @doc """
-    a.
-  """
-  def fun(var) do
-    {1,2,3}
-    [1,2,3]
-    "aaa"
-    1.2
-    1
-    :a
-    true
-    false
+  def fun(1) do 
+    rem((1-a)/(2+a),2)
   end
-
-  @doc """
-    d.
-  """
-  def fun(var), do: 1
 end

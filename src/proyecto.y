@@ -12,7 +12,8 @@ void yyerror(char const *message);
   int i;
   float real;
 }
-%token DOT SLASH CM PO PC BO BC TO TC EQ PIPE AR L_SEP WC
+%token DOT SLASH CM PO PC BO BC TO TC EQ PIPE AR L_SEP WC 
+%token PLUS MINUS MULT DIV1 DIV2 REM
 %token MOD_CALL ALIAS
 %token IF ELSE COND CASE GUARD IF1 IF2
 %token <str> STR MOD NAME EXP
@@ -21,8 +22,9 @@ void yyerror(char const *message);
 %token <real> REAL
 %token DM DEF DEFP DO DO2 END MDOC DOC DOCCONT ENDDOC NIL
 %type <str> def modulo mod_cab mod moddoc fdoc docs funciones funcion cuerpo
-%type <str> parametros param params var lista listcont
-%type <str> bool tupla tcont if cond case
+%type <str> parametros param params expr lista listcont
+%type <str> num bool tupla tcont if cond case op
+%type <i> op_ar 
 %start Program
 %%
 
@@ -70,22 +72,40 @@ params : params CM param {}
   | param {}
   ;
 
-param : NAME {}
+param : expr {}
   ;
 
-var : NAME {}
+expr : NAME {}
   | value {}
+  | condicion {}
+  | op {}
   ;
 
-value : INT {}
+op : op_ar {}
+  ;
+
+op_ar : num {}
+  | op_ar PLUS op_ar {}
+  | op_ar MINUS op_ar {}
+  | op_ar MULT op_ar {}
+  | DIV1 PO op_ar CM op_ar PC {}
+  | op_ar DIV2 op_ar {}
+  | REM PO op_ar CM op_ar PC {}
+  | PO op_ar PC {}
+  ;
+
+num : NAME {}
+  | INT {}
   | REAL {}
+  ;
+
+value : num {}
   | STR {}
   | ATOM {}
   | bool {}
   | NIL {}
   | lista {}
   | tupla {}
-  | condicion {}
   | WC {}
   ;
 
@@ -95,19 +115,19 @@ bool : TRUE {}
 
 lista : BO BC {}
   | BO listcont BC {}
-  | BO var L_SEP var BC {}
+  | BO expr L_SEP expr BC {}
   ;
 
-listcont : listcont CM var {}
-  | var {}
+listcont : listcont CM expr {}
+  | expr {}
   ;
 
 tupla : TO TC {}
   | TO tcont TC {}
   ;
 
-tcont : tcont CM var {}
-  | var {}
+tcont : tcont CM expr {}
+  | expr {}
   ;
 
 condicion : if {}
@@ -115,21 +135,21 @@ condicion : if {}
   | case {}
   ;
 
-if : IF var DO var ELSE var END {}
-  | IF var DO var END {}
+if : IF expr DO expr ELSE expr END {}
+  | IF expr DO expr END {}
   ;
 
 cond : COND DO conds END {}
   ;
 
-conds : conds var AR var {}
-  | var AR var {}
+conds : conds expr AR expr {}
+  | expr AR expr {}
   ;
 
-case : CASE var DO conds END {}
+case : CASE expr DO conds END {}
   ;
 
-cuerpo : cuerpo value
+cuerpo : cuerpo expr
   | {}
   ;
 

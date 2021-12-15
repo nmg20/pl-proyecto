@@ -17,13 +17,6 @@ mod_call   "import"|"use"|"require"
 quotes     \"\"\"
 doccont    [^\"""]
 ifcont     [^"do"]
-F          "false"
-T          "true"
-N          "nil"
-W          "when"
-A          "and"
-O          "or"
-n          "not"
 f          "fn"
 ar         "->"
 eq         "="
@@ -65,10 +58,16 @@ STR        ([^"]|"\""])+
 "."       {return DOT;}
 "->"      {return AR;}
 "_"       {return WC;}
+"+"       {return PLUS;}
+"-"       {return MINUS;}
+"div"     {return DIV1;}
+"/"       {return DIV2;}
+"*"       {return MULT;}
+"rem"     {return REM;}
 {or}      {printf("List Separator\n");return L_SEP;}
-{T}       {return TRUE;}
-{F}       {return FALSE;}
-{N}       {return NIL;}
+"true"       {return TRUE;}
+"false"       {return FALSE;}
+"nil"       {return NIL;}
 "import"|"use"|"require"{ws}{mod} {return MOD_CALL;}
 "if"|"unless"      {return IF;}
 "else"   {return ELSE;}

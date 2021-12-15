@@ -13,12 +13,14 @@
     - identificación de documentaciones
     - condicionales/decisión
     - Cuerpo de funciones
+    - Operadores -> aritméticos (,-,*,/,div,rem)
   ### Pendientes:
     - Tipos soportados: Numéricos, Octal, Hexadecimal, (*Binary*), Átomos, Booleanos, Strings, (*Binarios*), Listas, Tuplas
     - (*Variables -> declaración*)
-    - Operadores -> aritméticos (+,-,*,/,div,rem)
+    - Operadores -> ***aritméticos (+,-,*,/,div,rem)***
                  -> lógicos (||,&&,!, not, or)
                  -> comparación (==,!=,===,!==,<=,>=,>,<)
+                 -> misc. (String: <>), (Listas: ++, --, in)
                  -> (*(No incluidos) Bitwise*)
     - alias, import, require, use
     - typespec
