@@ -14,9 +14,10 @@ void yyerror(char const *message);
 }
 %token DOT SLASH CM PO PC BO BC TO TC EQ PIPE AR L_SEP WC 
 %token PLUS MINUS MULT DIV1 DIV2 REM
+%token AND1 AND2 OR1 OR2 NOT1 NOT2
 %token MOD_CALL ALIAS
 %token IF ELSE COND CASE GUARD IF1 IF2
-%token <str> STR MOD NAME EXP
+%token <str> STR MOD NAME EXP CHRL
 %token <atom> ATOM
 %token <i> INT TRUE FALSE
 %token <real> REAL
@@ -82,6 +83,7 @@ expr : NAME {}
   ;
 
 op : op_ar {}
+  | op_log {}
   ;
 
 op_ar : num {}
@@ -92,6 +94,15 @@ op_ar : num {}
   | op_ar DIV2 op_ar {}
   | REM PO op_ar CM op_ar PC {}
   | PO op_ar PC {}
+  ;
+
+op_log : bool {}
+  | op_log AND1 op_log {}
+  | op AND2 op {}
+  | op_log OR1 op_log {}
+  | op OR2 op {}
+  | NOT1 op_log {}
+  | NOT2 op {}
   ;
 
 num : NAME {}
@@ -116,6 +127,7 @@ bool : TRUE {}
 lista : BO BC {}
   | BO listcont BC {}
   | BO expr L_SEP expr BC {}
+  | CHRL {}
   ;
 
 listcont : listcont CM expr {}

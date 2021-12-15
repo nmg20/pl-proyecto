@@ -20,14 +20,19 @@ ifcont     [^"do"]
 f          "fn"
 ar         "->"
 eq         "="
-or         "|"[^">"]
+or         "|"[^">""|"]
 sum        "+"
-INT        [0-9]+
+int        ([0-9]+"_")?[0-9]+
+hex        "0x"([0-9]|[A-F]|[a-f])+
+oct        "0o"[0-7]+
+bin        "0b"[0-1]+
+INT        {int}|{hex}|{oct}|{bin}
 REAL       "-"?[0-9]+"."[0-9]+
 ATOM       :[a-z_]+
 mod        [A-Z][A-Za-z]*
 name       [a-z_]+
 STR        ([^"]|"\""])+
+CHARL      ([^'']|"\'"])+
 
 %s FUN DOCF 
 
@@ -64,6 +69,12 @@ STR        ([^"]|"\""])+
 "/"       {return DIV2;}
 "*"       {return MULT;}
 "rem"     {return REM;}
+"and"     {return AND1;}
+"&&"      {return AND2;}
+"or"      {return OR1;}
+"||"      {return OR2;}
+"not"     {return NOT1;}
+"!"       {return NOT2;}
 {or}      {printf("List Separator\n");return L_SEP;}
 "true"       {return TRUE;}
 "false"       {return FALSE;}
@@ -80,6 +91,7 @@ STR        ([^"]|"\""])+
 {REAL}    {yylval.real=atof(yytext);return REAL;}
 {ATOM}    {yylval.atom=strdup(yytext);return ATOM;}
 \"{STR}\" {yylval.str=strdup(yytext);return STR;}
+\'{CHARL}\' {yylval.str=strdup(yytext);return CHRL;}
 .         {printf("[ERROR: %s]\n",strdup(yytext));}
 %%
 
