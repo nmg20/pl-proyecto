@@ -15,19 +15,19 @@ void yyerror(char const *message);
 }
 %token DOT SLASH FN CM PO PC BO BC TO TC PIPE AR L_SEP WC
 %token PLUS MINUS MULT DIV1 DIV2 REM
-%token AND1 AND2 OR1 OR2 NOT1 NOT2
-%token EQ NEQ LT LTE GT GTE
+%token AND AND2 OR OR2 NOT NOT2
+%token EQ EQ2 LT GT
 %token MOD_CALL ALIAS
 %token IF ELSE COND CASE GUARD IF1 IF2
-%token <str> STR MOD NAME EXP CHRL
+%token <str> STR MOD NAME EXP CHRL KEY
 %token <atom> ATOM
 %token <i> INT TRUE FALSE
 %token <real> REAL
 %token DM DEF DEFP DO DO2 END MDOC DOC DOCCONT ENDDOC NIL
 %type <str> def modulo mod_cab mod moddoc fdoc docs funciones funcion cuerpo
-%type <str> parametros param params expr lista listcont
+%type <str> parametros param params expr lista listcont keyword kw_cont
 %type <str> num bool tupla if cond case op fanon
-%type <i> op_ar
+%type <i> op_ar concat_l concat_s
 %start Program
 %%
 
@@ -88,6 +88,19 @@ expr : var {}
   ;
 
 var : NAME {}
+  | var_l {}
+  | var_t {}
+  ;
+
+var_l : BO var_col_cont BC {}
+  | BO var L_SEP var BC {}
+  | var_l PLUS PLUS var_l {}
+  ;
+
+var_t : TO var_col_cont TC {}
+
+var_col_cont : var_col_cont CM var {}
+  | var {}
   ;
 
 op : op_ar {}
@@ -106,20 +119,20 @@ op_ar : num {}
   ;
 
 op_log : bool {}
-  | op_log AND1 op_log {}
+  | op_log AND op_log {}
   | op AND2 op {}
-  | op_log OR1 op_log {}
+  | op_log OR op_log {}
   | op OR2 op {}
-  | NOT1 op_log {}
-  | NOT2 op {}
+  | NOT op {}
+  | NOT2 op_log {}
   ;
 
-op_comp : expr EQ expr {}
-  | expr NEQ expr {}
+op_comp : expr EQ2 expr {}
+  | expr NOT EQ expr {}
   | expr LT expr {}
-  | expr LTE expr {}
+  | expr LT EQ expr {}
   | expr GT expr {}
-  | expr GTE expr {}
+  | expr GT EQ expr {}
   ;
 
 num : NAME {}
@@ -129,23 +142,42 @@ num : NAME {}
 
 value : INT {}
   | REAL {}
-  | STR {}
+  | string {}
   | ATOM {}
   | bool {}
   | NIL {}
   | lista {}
   | tupla {}
+  | keyword {}
   | WC {}
+  ;
+
+string : STR {}
+  | concat_s {}
   ;
 
 bool : TRUE {}
   | FALSE {}
   ;
 
+concat_l : concat_l PLUS PLUS lista {}
+  | lista PLUS PLUS lista {}
+  ;
+
+concat_s : concat_s LT GT STR {}
+  | STR LT GT STR {}
+  | NAME LT GT STR {}
+  | NAME LT GT NAME {}
+  | STR LT GT NAME {}
+  ;
+
 lista : BO BC {}
   | BO listcont BC {}
   | BO expr L_SEP expr BC {}
   | CHRL {}
+  | concat_l {}
+  | var_l {}
+  | NAME {}
   ;
 
 listcont : listcont CM expr {}
@@ -154,6 +186,16 @@ listcont : listcont CM expr {}
 
 tupla : TO TC {}
   | TO listcont TC {}
+  | var_t {}
+  ;
+
+keyword : BO kw_cont BC {}
+  ;
+
+kw_cont : kw_cont CM KEY expr {}
+  | kw_cont CM TO KEY expr TC {}
+  | KEY expr {}
+  | TO KEY expr TC {}
   ;
 
 condicion : if {}

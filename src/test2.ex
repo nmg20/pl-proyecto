@@ -5,12 +5,25 @@ defmodule Boolean do
   @doc """
     a.
   """
+  def fun?(p1) do
+    fn x!,_ -> IO.puts(x) end
+    [1]++[a|b]
+    "a"<>"b"
+  end
+  
   def fun(var) do
     {1,2,3}
     [1,2,3]
     "aaa"
     1.2
-    1
+    1 == 1
+    "a" === 'a'
+    3<4
+    3<=5
+    true>=false
+    nil > 0
+    "a"!=false
+    a==a
     :a
     true
     false
