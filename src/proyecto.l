@@ -79,6 +79,7 @@ CHARL      ([^'']|"\'"])+
 "false"       {return FALSE;}
 "nil"       {return NIL;}
 "fn"        {return FN;}
+"%"         {return MAP;}
 "if"|"unless"      {return IF;}
 "else"   {return ELSE;}
 "cond"    {return COND;}

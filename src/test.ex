@@ -7,6 +7,7 @@ defmodule Effects do
     [1]++[a|b]
     "a"<>"b"
     [a: 1,b: 2, a: 3]
+    %{:a => 2}
   end
   defp create_list(n, l), do: create_list(n - 1, [n | l])
 end

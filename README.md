@@ -20,6 +20,7 @@
               -> lógicos (||,&&,!, not, or)
               -> comparación (==,!=,<=,>=,>,<)
     - Funciones anónimas
+    - Maps(!=>) y Kerword lists
   ### Pendientes:
     - Tipos soportados: Numéricos, Octal, Hexadecimal, (*Binary*), Átomos, Booleanos, Strings, (*Binarios*), Listas, Tuplas
     - Operadores 
@@ -28,7 +29,6 @@
     - alias, import, require, use
     - asignación de variables
     - typespec
-    - Maps y keyword lists
     - Binaries
     - comprobar invocación de fun. existente/Módulo
     - guardias

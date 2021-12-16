@@ -13,7 +13,7 @@ void yyerror(char const *message);
   int bool;
   float real;
 }
-%token DOT SLASH FN CM PO PC BO BC TO TC PIPE AR L_SEP WC
+%token DOT SLASH FN CM PO PC BO BC TO TC PIPE AR L_SEP WC MAP
 %token PLUS MINUS MULT DIV1 DIV2 REM
 %token AND AND2 OR OR2 NOT NOT2
 %token EQ EQ2 LT GT
@@ -25,7 +25,7 @@ void yyerror(char const *message);
 %token <real> REAL
 %token DM DEF DEFP DO DO2 END MDOC DOC DOCCONT ENDDOC NIL
 %type <str> def modulo mod_cab mod moddoc fdoc docs funciones funcion cuerpo
-%type <str> parametros param params expr lista listcont keyword kw_cont
+%type <str> parametros param params expr lista listcont keyword kw_cont map map_cont
 %type <str> num bool tupla if cond case op fanon
 %type <i> op_ar concat_l concat_s
 %start Program
@@ -149,6 +149,7 @@ value : INT {}
   | lista {}
   | tupla {}
   | keyword {}
+  | map {}
   | WC {}
   ;
 
@@ -196,6 +197,16 @@ kw_cont : kw_cont CM KEY expr {}
   | kw_cont CM TO KEY expr TC {}
   | KEY expr {}
   | TO KEY expr TC {}
+  ;
+
+map : MAP TO map_cont TC {}
+  | MAP TO TC {}
+  ;
+
+map_cont : map_cont CM expr EQ GT expr {}
+  | map_cont CM KEY expr {}
+  | expr EQ LT expr {}
+  | KEY expr {}
   ;
 
 condicion : if {}
