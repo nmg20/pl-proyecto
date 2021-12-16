@@ -19,9 +19,9 @@
               -> aritméticos (,-,*,/,div,rem)
               -> lógicos (||,&&,!, not, or)
               -> comparación (==,!=,<=,>=,>,<)
+    - Funciones anónimas
   ### Pendientes:
     - Tipos soportados: Numéricos, Octal, Hexadecimal, (*Binary*), Átomos, Booleanos, Strings, (*Binarios*), Listas, Tuplas
-    - (*Variables -> declaración*)
     - Operadores 
                  -> misc. (String: <>), (Listas: ++, --, in)
                  -> (*(No incluidos) Bitwise*)

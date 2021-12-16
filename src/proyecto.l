@@ -5,12 +5,7 @@
 %}
 
 ws         [ \t\n\r]
-def        "def"
-dp         "defp"
 dm         "defmodule"
-d1         "do"
-d2         "do:"
-end        "end"
 mdoc        "@moduledoc"
 doc        "@doc"
 mod_call   "import"|"use"|"require"
@@ -30,7 +25,7 @@ INT        {int}|{hex}|{oct}|{bin}
 REAL       "-"?[0-9]+"."[0-9]+
 ATOM       :[a-z_]+
 mod        [A-Z][A-Za-z]*
-name       [a-z_]+
+name       ([a-z_][0-9]*)+
 STR        ([^"]|"\""])+
 CHARL      ([^'']|"\'"])+
 
@@ -40,15 +35,14 @@ CHARL      ([^'']|"\'"])+
 
 {ws}      {}
 {dm}      {return DM;}
-{def}     {return DEF;}
-{dp}      {return DEFP;}
-{d1}      {return DO;}
-{d2}      {return DO2;}
-{end}     {return END;}
+"def"[^"p"]     {return DEF;}
+"defp"      {return DEFP;}
+"do"[^":"]      {return DO;}
+"do:"      {return DO2;}
+"end"     {return END;}
 "#".      {}
 {mdoc}{ws}+{quotes}   {BEGIN(DOCF);return MDOC;}
 {doc}{ws}+{quotes}    {BEGIN(DOCF);return DOC;}
-<DOCF>{ws}               {}
 <DOCF>{doccont}+         {return DOCCONT;}
 <DOCF>{quotes}          {BEGIN(INITIAL);return ENDDOC;}
 ","       {return CM;}
@@ -59,7 +53,7 @@ CHARL      ([^'']|"\'"])+
 "["       {return BO;}
 "]"       {return BC;}
 "\\"      {return SLASH;}
-"=="      {return EQ;}
+"=="("=")?      {return EQ;}
 "!="      {return NEQ;}
 ">"       {return LT;}
 ">="      {return LTE;}
@@ -85,12 +79,13 @@ CHARL      ([^'']|"\'"])+
 "true"       {return TRUE;}
 "false"       {return FALSE;}
 "nil"       {return NIL;}
-"import"|"use"|"require"{ws}{mod} {return MOD_CALL;}
+"fn"        {return FN;}
 "if"|"unless"      {return IF;}
 "else"   {return ELSE;}
 "cond"    {return COND;}
 "case"    {return CASE;}
 "alias"{ws}{mod}", as:"{mod} {return ALIAS;}
+"import"|"use"|"require"{ws}{mod} {return MOD_CALL;}
 {mod}     {yylval.str=strdup(yytext);return MOD;}
 {name}    {yylval.str=strdup(yytext);return NAME;}
 {INT}     {yylval.i=atoi(yytext);return INT;}
