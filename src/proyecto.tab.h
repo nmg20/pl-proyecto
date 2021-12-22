@@ -46,139 +46,147 @@ extern int yydebug;
   enum yytokentype
   {
     DOT = 258,
-    SLASH = 259,
-    FN = 260,
-    CM = 261,
-    PO = 262,
-    PC = 263,
-    BO = 264,
-    BC = 265,
-    TO = 266,
-    TC = 267,
-    PIPE = 268,
-    AR = 269,
-    L_SEP = 270,
-    WC = 271,
-    MAP = 272,
-    PLUS = 273,
-    MINUS = 274,
-    MULT = 275,
-    DIV1 = 276,
-    DIV2 = 277,
-    REM = 278,
-    AND = 279,
-    AND2 = 280,
-    OR = 281,
-    OR2 = 282,
-    NOT = 283,
-    NOT2 = 284,
-    EQ = 285,
-    EQ2 = 286,
-    LT = 287,
-    GT = 288,
-    MOD_CALL = 289,
-    ALIAS = 290,
-    IF = 291,
-    ELSE = 292,
-    COND = 293,
-    CASE = 294,
-    GUARD = 295,
-    IF1 = 296,
-    IF2 = 297,
-    STR = 298,
-    MOD = 299,
-    NAME = 300,
-    EXP = 301,
-    CHRL = 302,
-    KEY = 303,
-    ATOM = 304,
-    INT = 305,
-    TRUE = 306,
-    FALSE = 307,
-    REAL = 308,
-    DM = 309,
-    DEF = 310,
-    DEFP = 311,
-    DO = 312,
-    DO2 = 313,
-    END = 314,
-    MDOC = 315,
-    DOC = 316,
-    DOCCONT = 317,
-    ENDDOC = 318,
-    NIL = 319
+    DOTS = 259,
+    SLASH = 260,
+    FN = 261,
+    CM = 262,
+    PO = 263,
+    PC = 264,
+    BO = 265,
+    BC = 266,
+    TO = 267,
+    TC = 268,
+    PIPE = 269,
+    AR = 270,
+    L_SEP = 271,
+    WC = 272,
+    MAP = 273,
+    APND = 274,
+    PLUS = 275,
+    MINUS = 276,
+    MULT = 277,
+    DIV1 = 278,
+    DIV2 = 279,
+    REM = 280,
+    AND = 281,
+    AND2 = 282,
+    OR = 283,
+    OR2 = 284,
+    NOT = 285,
+    NOT2 = 286,
+    EQ = 287,
+    EQ2 = 288,
+    LT = 289,
+    GT = 290,
+    MOD_CALL = 291,
+    FOR = 292,
+    ALIAS = 293,
+    AS = 294,
+    IF = 295,
+    ELSE = 296,
+    COND = 297,
+    CASE = 298,
+    GUARD = 299,
+    IF1 = 300,
+    IF2 = 301,
+    STR = 302,
+    MOD = 303,
+    NAME = 304,
+    EXP = 305,
+    CHRL = 306,
+    KEY = 307,
+    ATOM = 308,
+    INT = 309,
+    TRUE = 310,
+    FALSE = 311,
+    REAL = 312,
+    DM = 313,
+    DEF = 314,
+    DEFP = 315,
+    DO = 316,
+    DO2 = 317,
+    END = 318,
+    MDOC = 319,
+    DOC = 320,
+    DOCCONT = 321,
+    ENDDOC = 322,
+    NIL = 323
   };
 #endif
 /* Tokens.  */
 #define DOT 258
-#define SLASH 259
-#define FN 260
-#define CM 261
-#define PO 262
-#define PC 263
-#define BO 264
-#define BC 265
-#define TO 266
-#define TC 267
-#define PIPE 268
-#define AR 269
-#define L_SEP 270
-#define WC 271
-#define MAP 272
-#define PLUS 273
-#define MINUS 274
-#define MULT 275
-#define DIV1 276
-#define DIV2 277
-#define REM 278
-#define AND 279
-#define AND2 280
-#define OR 281
-#define OR2 282
-#define NOT 283
-#define NOT2 284
-#define EQ 285
-#define EQ2 286
-#define LT 287
-#define GT 288
-#define MOD_CALL 289
-#define ALIAS 290
-#define IF 291
-#define ELSE 292
-#define COND 293
-#define CASE 294
-#define GUARD 295
-#define IF1 296
-#define IF2 297
-#define STR 298
-#define MOD 299
-#define NAME 300
-#define EXP 301
-#define CHRL 302
-#define KEY 303
-#define ATOM 304
-#define INT 305
-#define TRUE 306
-#define FALSE 307
-#define REAL 308
-#define DM 309
-#define DEF 310
-#define DEFP 311
-#define DO 312
-#define DO2 313
-#define END 314
-#define MDOC 315
-#define DOC 316
-#define DOCCONT 317
-#define ENDDOC 318
-#define NIL 319
+#define DOTS 259
+#define SLASH 260
+#define FN 261
+#define CM 262
+#define PO 263
+#define PC 264
+#define BO 265
+#define BC 266
+#define TO 267
+#define TC 268
+#define PIPE 269
+#define AR 270
+#define L_SEP 271
+#define WC 272
+#define MAP 273
+#define APND 274
+#define PLUS 275
+#define MINUS 276
+#define MULT 277
+#define DIV1 278
+#define DIV2 279
+#define REM 280
+#define AND 281
+#define AND2 282
+#define OR 283
+#define OR2 284
+#define NOT 285
+#define NOT2 286
+#define EQ 287
+#define EQ2 288
+#define LT 289
+#define GT 290
+#define MOD_CALL 291
+#define FOR 292
+#define ALIAS 293
+#define AS 294
+#define IF 295
+#define ELSE 296
+#define COND 297
+#define CASE 298
+#define GUARD 299
+#define IF1 300
+#define IF2 301
+#define STR 302
+#define MOD 303
+#define NAME 304
+#define EXP 305
+#define CHRL 306
+#define KEY 307
+#define ATOM 308
+#define INT 309
+#define TRUE 310
+#define FALSE 311
+#define REAL 312
+#define DM 313
+#define DEF 314
+#define DEFP 315
+#define DO 316
+#define DO2 317
+#define END 318
+#define MDOC 319
+#define DOC 320
+#define DOCCONT 321
+#define ENDDOC 322
+#define NIL 323
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 
 union YYSTYPE
 {
-#line 9 "proyecto.y" /* yacc.c:1909  */
+#line 40 "proyecto.y" /* yacc.c:1909  */
 
   char * str;
   char * atom;
@@ -186,7 +194,7 @@ union YYSTYPE
   int bool;
   float real;
 
-#line 190 "proyecto.tab.h" /* yacc.c:1909  */
+#line 198 "proyecto.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

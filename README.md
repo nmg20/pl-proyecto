@@ -21,16 +21,16 @@
               -> comparación (==,!=,<=,>=,>,<)
     - Funciones anónimas
     - Maps(!=>) y Kerword lists
+    - alias, import, require, use
+    - asignación de variables
+    - comprobar invocación de fun. existente/Módulo
   ### Pendientes:
-    - Tipos soportados: Numéricos, Octal, Hexadecimal, (*Binary*), Átomos, Booleanos, Strings, (*Binarios*), Listas, Tuplas
+    - Tipos soportados: Numéricos, Octal, (*Hexadecimal*), (*Binary*), Átomos, Booleanos, Strings, (*Binarios*), Listas, Tuplas
     - Operadores 
                  -> misc. (String: <>), (Listas: ++, --, in)
                  -> (*(No incluidos) Bitwise*)
-    - alias, import, require, use
-    - asignación de variables
     - typespec
     - Binaries
-    - comprobar invocación de fun. existente/Módulo
     - guardias
     - registro de funciones y variables
   ### No Contemplados:
@@ -39,6 +39,10 @@
     - Data Structures
     - Unicode code point
     - Bitstrings
+    - guardias
+    - comprensiones
+    - typespec
+    - binarios
 
   ### **IMPORTANTE**
     - Diferencia entre variables y valores

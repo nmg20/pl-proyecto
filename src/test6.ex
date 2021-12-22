@@ -4,11 +4,11 @@ defmodule Mi6 do
 
   def get_keys([],a,_), do: a
   def get_keys(l,a,0) do
-    {k,_}=Enum.at(l,0)
+    Enum.at(l,0)
     [k|a]
   end
   def get_keys(l,a,n) do
-    {k,_}=Enum.at(l,n)
+    Enum.at(l,n)
     get_keys(l,[k|a],n-1)
   end
   def get_keys(l), do:
@@ -48,13 +48,13 @@ defmodule Mi6 do
   end
 
   def handle_cast({:rec, ax, dest}, state) do
-    l = Create.create(String.length(dest))
+    Create.create(String.length(dest))
     Agent.start_link(fn -> Enum.shuffle(l) end, name: ax)
     {:noreply, Db.write(state, ax, dest)}
   end
 
   def handle_cast({:asig, ax, :espiar}, state) do
-    if Process.whereis ax |> is_nil != true do
+    if (Process.whereis(ax)==nil) do
       Agent.update(ax, fn state -> Manipulating.filter(state, hd(state)) end)
       {:noreply, Agent.get(ax, fn l -> l end)}
     else
@@ -63,7 +63,7 @@ defmodule Mi6 do
   end
 
   def handle_cast({:asig, ax, :contrainformar}, state) do
-    if Process.whereis ax |> is_nil != true do
+    if (Process.whereis(ax)==nil) do
       Agent.update(ax, fn state -> Manipulating.reverse(state) end)
       {:noreply, Agent.get(ax, fn l -> l end)}
     else
@@ -75,14 +75,8 @@ defmodule Mi6 do
     if Process.whereis(ax) == nil do
       {:reply, :you_are_here_we_are_not, state}
     else
-      l=Agent.get(ax,fn s -> s end)    
+      Agent.get(ax,fn s -> s end)    
       {:reply, l, state}
     end
   end
-
-  #def handle_cast(:dis,state) do
-  #  cleanup(state)
-  #  GenServer.stop(:mi6)
-  #  {:noreply,[]}
-  #end
 end

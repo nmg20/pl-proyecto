@@ -12,6 +12,7 @@ doc        "@doc"
 mod_call   "import"|"use"|"require"
 quotes     \"\"\"
 doccont    [^\"""]
+comcont    [^\n\r]
 ifcont     [^"do"]
 f          "fn"
 ar         "->"
@@ -25,9 +26,9 @@ bin        "0b"[0-1]+
 INT        {int}|{hex}|{oct}|{bin}
 REAL       "-"?[0-9]+"."[0-9]+
 ATOM       :[a-z_]+
-mod        [A-Z][A-Za-z]*
+mod        [A-Z][A-Za-z]*("."[A-Z][A-Za-z]*)*
 name       ([a-z_]+[A-Z0-9]*)+("?"|"!")?
-STR        ([^"]|"\""])+
+STR        ([^"]|"\""])*
 CHARL      ([^'']|"\'"])+
 
 %s FUN DOCF COM
@@ -41,7 +42,9 @@ CHARL      ([^'']|"\'"])+
 "do"[^":"]      {return DO;}
 "do:"      {return DO2;}
 "end"     {return END;}
-"#".[^\n\r]      {}
+"#"       {BEGIN(COM);}
+<COM>{comcont}      {}
+<COM>{nl}   {BEGIN(INITIAL);}
 {mdoc}{ws}+{quotes}   {BEGIN(DOCF);return MDOC;}
 {doc}{ws}+{quotes}    {BEGIN(DOCF);return DOC;}
 <DOCF>{doccont}+         {return DOCCONT;}
@@ -54,7 +57,8 @@ CHARL      ([^'']|"\'"])+
 "["       {return BO;}
 "]"       {return BC;}
 "\\"      {return SLASH;}
-"="[^"="]      {return EQ;}
+":"       {return DOTS;}
+"="      {return EQ;}
 "=="("=")?      {return EQ2;}
 ">"       {return GT;}
 "<"       {return LT;}
@@ -63,6 +67,7 @@ CHARL      ([^'']|"\'"])+
 "->"      {return AR;}
 "_"{name}?       {return WC;}
 "+"       {return PLUS;}
+"++"      {return APND;}
 "-"       {return MINUS;}
 "div"     {return DIV1;}
 "/"       {return DIV2;}
@@ -84,7 +89,9 @@ CHARL      ([^'']|"\'"])+
 "else"   {return ELSE;}
 "cond"    {return COND;}
 "case"    {return CASE;}
-"alias"{ws}{mod}", as:"{mod} {return ALIAS;}
+"for"     {return FOR;}
+"alias"   {return ALIAS;}
+"as:"     {return AS;}
 "import"|"use"|"require"{ws}{mod} {return MOD_CALL;}
 {mod}     {yylval.str=strdup(yytext);return MOD;}
 {name}    {yylval.str=strdup(yytext);return NAME;}
@@ -95,6 +102,6 @@ CHARL      ([^'']|"\'"])+
 \"{STR}\" {yylval.str=strdup(yytext);return STR;}
 \'{CHARL}\' {yylval.str=strdup(yytext);return CHRL;}
 {nl}      {}
-.         {printf("[ERROR: %s]\n",strdup(yytext));}
+.         {printf("[ERROR: %s at line %i]\n",strdup(yytext),yylineno);}
 %%
 

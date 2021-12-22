@@ -1,25 +1,16 @@
-defmodule Boolean do
-  @moduledoc "
-  Funcións booleanas implementadas mediante pattern-matching.
-  "
-  @doc """
-  Función booleana de negación.
+defmodule Effects do
+  @moduledoc """
+  Funcións que provocan efectos colaterais.
   """
-
-  def b_not(true), do: false
-  def b_not(false), do: true
-
-  @doc """
-  Función booleana de intersección.
-  """
-  def b_and(true, true), do: true
-  def b_and(true, false), do: false
-  def b_and(false, _), do: false
-
-  @doc """
-  Función booleana de intersección.
-  """
-  def b_or(true, _), do: true
-  def b_or(_, true), do: true
-  def b_or(false, false), do: false
+  def fun?(p1) do
+    fn x!,_ -> IO.puts(x<>"a") end
+    [1]++[a|b]
+    "a"<>"b"
+    [a: 1,b: 2, a: 3]
+    %{a: 2, b: [1,2], c: "a"}
+    [p] ++ quicksort(r)
+    Enum.map([1,2,3], fn x -> x*2 end)
+    'a'++'b'++[1]
+  end
+  defp create_list(n, []), do: create_list(n - 1, [n | l])
 end

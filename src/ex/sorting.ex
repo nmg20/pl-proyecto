@@ -1,9 +1,9 @@
 defmodule Sorting do
-  @moduledoc "
+  @moduledoc """
   Funcións que ordenan listas de elementos.
   Non implementan recursividade terminal polo que a súa execución
   pode demorarse un pouco.
-  "
+  """
 
   def pr_list([]), do: IO.puts("")
   def pr_list([h]), do: IO.puts("#{h} \n")
